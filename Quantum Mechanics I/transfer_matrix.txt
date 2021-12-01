@@ -1,0 +1,133 @@
+
+Out[12]= {{1/2 (1+x/y),1/2 (1-x/y)},{1/2 (1-x/y),1/2 (1+x/y)}}
+
+
+To finish the problem set, invert the weird transfer matrix, and find the required probabilities
+Subscript[M, h] = 1/2 {{(1+x/y),((1-x/y))},{((1-x/y)),((1+x/y))}};
+Subscript[M, r] = {{Exp[I*y*d],0},{0,Exp[-I*y*d]}};
+
+Subscript[M, h]/.x->k/.y->\[Beta]//MatrixForm;
+Subscript[M, r] /.d->a/.y->\[Beta]//MatrixForm;
+Subscript[M, h]/.x->\[Beta]/.y->k//MatrixForm;
+Subscript[M, r] /.d->L/.y->k//MatrixForm;
+Subscript[M, h]/.x->\[Beta]/.y->k//MatrixForm;
+Subscript[M, r] /.d->a/.y->\[Beta]//MatrixForm;
+Subscript[M, h]/.x->\[Beta]/.y->k//MatrixForm;
+
+m1=Subscript[M, h]/.x->k/.y->\[Beta];
+m2=Subscript[M, r] /.d->a/.y->\[Beta];
+m3=Subscript[M, h]/.x->\[Beta]/.y->k;
+m4=Subscript[M, r] /.d->L/.y->k;
+m5=Subscript[M, h]/.x->k/.y->\[Beta];
+m6=Subscript[M, r] /.d->a/.y->\[Beta];
+m7=Subscript[M, h]/.x->\[Beta]/.y->k;
+
+T = m1.m2.m3.m4.m5.m6.m7;
+
+
+t21 = T[[2,1]];
+t22 = T[[2,2]];
+
+Det[T]
+
+
+R = Conjugate[t21/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1]*(t21/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1)
+T = Conjugate[Det[T]/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1]*(Det[T]/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1)
+R+T
+
+
+
+
+
+Out[1995]= {{1/2 (1+k/\[Beta]),1/2 (1-k/\[Beta])},{1/2 (1-k/\[Beta]),1/2 (1+k/\[Beta])}}
+Out[2005]= 1
+Out[2006]= 0.843553 +0. I
+Out[2007]= 0.156447 +0. I
+Out[2008]= 1. +0. I
+In[27]:= m1*m2*m3*m4*m5*m6*m7//MatrixForm
+m1*m2
+T = m1*m2*m3*m4*m5*m6*m7
+t=Det[T]/(1/16 E^(-2 a i x-i L x) (1+k/\[Beta]) (1+\[Beta]/k)^3)//Simplify
+r=((1/16 E^(2 a i x+i L x) (1+k/\[Beta]) (1+\[Beta]/k))/(1/16 E^(-2 a i x-i L x) (1+k/\[Beta]) (1+\[Beta]/k)^3))^3//Simplify
+trans=Abs[t]^2//Simplify
+ref=Abs[r]^2//Simplify
+Out[27]//MatrixForm= (1/16 E^(2 a i x+i L x) (1+k/\[Beta]) (1+\[Beta]/k)^3	0
+0	1/16 E^(-2 a i x-i L x) (1+k/\[Beta]) (1+\[Beta]/k)^3
+
+)
+Out[28]= {{1/2 E^(a i x) (1+k/\[Beta]),0},{0,1/2 E^(-a i x) (1+k/\[Beta])}}
+Out[29]= {{1/16 E^(2 a i x+i L x) (1+k/\[Beta]) (1+\[Beta]/k)^3,0},{0,1/16 E^(-2 a i x-i L x) (1+k/\[Beta]) (1+\[Beta]/k)^3}}
+Out[30]= (E^(i (2 a+L) x) (k+\[Beta])^4)/(16 k^3 \[Beta])
+Out[31]= (E^(6 i (2 a+L) x) k^6)/(k+\[Beta])^6
+Out[32]= 1/256 E^(2 Re[i (2 a+L) x]) Abs[(k+\[Beta])^4/(k^3 \[Beta])]^2
+Out[33]= E^(12 Re[i (2 a+L) x]) Abs[k^6/(k+\[Beta])^6]^2
+In[2173]:= Subscript[T, h] = 1/2 {{(1+Subscript[k, n]/Subscript[k, n+1]),((1-Subscript[k, n]/Subscript[k, n+1]))},
+{((1-Subscript[k, n]/Subscript[k, n+1])),((1+Subscript[k, n]/Subscript[k, n+1]))}};
+Subscript[T, r] = {{Exp[I*Subscript[k, n]*Subscript[L, n]],0},
+{0,Exp[-I*Subscript[k, n]*Subscript[L, n]]}};
+
+Subscript[T, h]/.Subscript[k, n]->k/.Subscript[k, n+1]->\[Beta]//MatrixForm;
+Subscript[T, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta]//MatrixForm;
+Subscript[T, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k//MatrixForm;
+Subscript[T, r] /.Subscript[L, n]->L/.Subscript[k, n]->k//MatrixForm;
+Subscript[T, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k//MatrixForm;
+Subscript[T, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta]//MatrixForm;
+Subscript[T, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k//MatrixForm;
+
+T1=Subscript[M, h]/.Subscript[k, n]->k/.Subscript[k, n+1]->\[Beta];
+T2=Subscript[M, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta];
+T3=Subscript[M, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k;
+T4=Subscript[M, r] /.Subscript[L, n]->L/.Subscript[k, n]->k;
+T5=Subscript[M, h]/.Subscript[k, n]->k/.Subscript[k, n+1]->\[Beta];
+T6=Subscript[M, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta];
+T7=Subscript[M, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k;
+
+T = T1.T2.T3.T4.T5.T6.T7;
+
+
+t21 = T[[2,1]];
+t22 = T[[2,2]];
+
+Det[T]
+
+
+R = Conjugate[t21/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1]*(t21/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1)
+T = Conjugate[Det[T]/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1]*(Det[T]/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1)
+R+T
+
+
+Out[2192]= 1
+Out[2193]= 0.843553 +0. I
+Out[2194]= 0.156447 +0. I
+Out[2195]= 1. +0. I
+Subscript[T, h] = 1/2 {{(1+Subscript[k, n]/Subscript[k, n+1]),((1-Subscript[k, n]/Subscript[k, n+1]))},{((1-Subscript[k, n]/Subscript[k, n+1])),((1+Subscript[k, n]/Subscript[k, n+1]))}};
+Subscript[T, r] = {{Exp[I*Subscript[k, n]*Subscript[L, n]],0},{0,Exp[-I*Subscript[k, n]*Subscript[L, n]]}};
+
+Subscript[T, h]/.Subscript[k, n]->k/.Subscript[k, n+1]->\[Beta]//MatrixForm;
+Subscript[T, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta]//MatrixForm;
+Subscript[T, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k//MatrixForm;
+Subscript[T, r] /.Subscript[L, n]->L/.Subscript[k, n]->k//MatrixForm;
+Subscript[T, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k//MatrixForm;
+Subscript[T, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta]//MatrixForm;
+Subscript[T, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k//MatrixForm;
+
+T1=Subscript[M, h]/.Subscript[k, n]->k/.Subscript[k, n+1]->\[Beta];
+T2=Subscript[M, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta];
+T3=Subscript[M, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k;
+T4=Subscript[M, r] /.Subscript[L, n]->L/.Subscript[k, n]->k;
+T5=Subscript[M, h]/.Subscript[k, n]->k/.Subscript[k, n+1]->\[Beta];
+T6=Subscript[M, r] /.Subscript[L, n]->a/.Subscript[k, n]->\[Beta];
+T7=Subscript[M, h]/.Subscript[k, n]->\[Beta]/.Subscript[k, n+1]->k;
+
+T = T1.T2.T3.T4.T5.T6.T7;
+
+
+t21 = T[[2,1]];
+t22 = T[[2,2]];
+
+Det[T]
+
+
+R = Conjugate[t21/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1]*(t21/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1)
+T = Conjugate[Det[T]/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1]*(Det[T]/t22/.\[Beta]->0.5/.k->2/.a->1/.L->1)
+R+T
